@@ -5,7 +5,7 @@ def save_players_stats_to_csv(player_stats, player_name):
     player_stats.to_csv('players_stats/{}.csv'.format(player_name), index=False)
 
 
-def scrap_players_data_and_save_to_csv(players):
+def scrap_all_players_data_to_csv(players):
     players = players.get_active_players()  # 582 players in total
 
     '''for player in players:

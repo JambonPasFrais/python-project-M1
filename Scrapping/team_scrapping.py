@@ -6,7 +6,7 @@ def save_teams_stats_to_csv(team_stats, team_name):
     print('Team: ', team_name, ' saved')
 
 
-def scrap_teams_data_and_save_to_csv(teams):
+def scrap_all_teams_data_to_csv(teams):
     teams = teams.get_teams()  # 30 teams in total
     '''
     for team in teams:
