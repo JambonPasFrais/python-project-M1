@@ -1,10 +1,12 @@
 from nba_api.stats.endpoints import playercareerstats
 
 
-def get_players_stats(players):
-    players = players.get_active_players()  # 582 players in total
+def save_players_stats_to_csv(player_stats, player_name):
+    player_stats.to_csv('players_stats/{}.csv'.format(player_name), index=False)
 
-    players_stats = {}
+
+def scrap_players_data_and_save_to_csv(players):
+    players = players.get_active_players()  # 582 players in total
 
     '''for player in players:
         player_id = player['id']
@@ -27,18 +29,15 @@ def get_players_stats(players):
         try:
             player_stats = playercareerstats.PlayerCareerStats(player_id=player_id)
             player_stats = player_stats.get_data_frames()[0]
+
+            player_stats['PLAYER_NAME'] = player_name
+
+            # remove the column where the SEASON_ID is different from 2022-23
+            # player_stats = player_stats[player_stats['SEASON_ID'] == '2022-23']
+
+            save_players_stats_to_csv(player_stats, player_name)
         except:
             print('Error with player: ', player_name)
             continue
 
-        # remove the column where the SEASON_ID is different from 2022-23
-        # player_stats = player_stats[player_stats['SEASON_ID'] == '2022-23']
-        player_stats['PLAYER_NAME'] = player_name
-        players_stats[player_name] = player_stats
-
-        return players_stats
-
-
-def save_players_stats_to_csv(players_stats):
-    for player_name, player_stats in players_stats.items():
-        player_stats.to_csv('players_stats/{}.csv'.format(player_name), index=False)
+    print('Scraping and saving of players finished')
