@@ -44,10 +44,20 @@ def plot_data(player):
 
 def player_rank_evo(player):
     rows_list = extract_csv_data(player)
-    stats = playercareerstats.PlayerCareerStats(player_id=rows_list[1][0]).get_data_frames()[10]
-    stats_dict = stats[['SEASON_ID','RANK_PTS']].to_dict()
-    print(list(stats_dict['SEASON_ID'].values()))
+    #get the age of the player for every seasons he played
+    global_stats = playercareerstats.PlayerCareerStats(player_id=rows_list[1][0]).get_data_frames()[0]
+    age_dict = global_stats[['PLAYER_AGE']].to_dict()
+    #get player's ranks
+    rank_stats = playercareerstats.PlayerCareerStats(player_id=rows_list[1][0]).get_data_frames()[10]
+    stats_dict = rank_stats[['SEASON_ID','RANK_PTS','PLAYER_AGE']].to_dict()
+    #Plot
     plt.figure()
-    plt.bar(list(stats_dict['SEASON_ID'].values()),list(stats_dict['RANK_PTS'].values()))
+    for i in range(len(list(age_dict['PLAYER_AGE'].values()))):
+        plt.plot(list(age_dict['PLAYER_AGE'].values())[i],list(stats_dict['RANK_PTS'].values())[i], "o-")
+    plt.gca().invert_yaxis()
+    plt.gca().set_xticks(list(age_dict['PLAYER_AGE'].values()))
+    plt.gca().set_yticks(list(stats_dict['RANK_PTS'].values()))
+    plt.legend(list(stats_dict['SEASON_ID'].values()))
+    plt.grid(True)
+    plt.title(player+"'s rank evolution")
     plt.show()
-#player_rank_evo("Bam Adebayo")
