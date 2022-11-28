@@ -12,6 +12,22 @@ def extract_csv_data(player):
             rows_list.append(rows)
         return rows_list
 
+def wait_choice(choice_list,index,text):
+    choice = 0
+    print("Choose the season for the "+text)
+    for i in range(len(choice_list)):
+        print(str(i+1)+". "+choice_list[i][index])
+    while choice < 1 or choice > len(choice_list):
+        try:
+            choice = int(input("Enter your choice: "))
+            if choice < 1 or choice > len(choice_list):
+                print("Invalid choice, try again")
+                choice = 0
+        except:
+            print("Invalid input, try again")
+
+    return choice_list[choice-1][index]
+
 def plot_data(player):
     rows_list = extract_csv_data(player)
     data_dict = {
@@ -24,7 +40,7 @@ def plot_data(player):
         "FGA": rows_list[0].index("FGA")
     }
     player_data_list = []
-    season = '2022-23'
+    season = wait_choice(rows_list[1:],rows_list[0].index("SEASON_ID"), "personal data")
     for list in rows_list[1:]:
         temp_dict = {}
         if list[1] == season:
@@ -52,12 +68,13 @@ def player_rank_evo(player):
     stats_dict = rank_stats[['SEASON_ID','RANK_PTS','PLAYER_AGE']].to_dict()
     #Plot
     plt.figure()
+    plt.plot(list(age_dict['PLAYER_AGE'].values()), list(stats_dict['RANK_PTS'].values()), "-", color='black')
     for i in range(len(list(age_dict['PLAYER_AGE'].values()))):
-        plt.plot(list(age_dict['PLAYER_AGE'].values())[i],list(stats_dict['RANK_PTS'].values())[i], "o-")
+        plt.plot(list(age_dict['PLAYER_AGE'].values())[i],list(stats_dict['RANK_PTS'].values())[i], "o", label=list(stats_dict['SEASON_ID'].values())[i])
     plt.gca().invert_yaxis()
     plt.gca().set_xticks(list(age_dict['PLAYER_AGE'].values()))
     plt.gca().set_yticks(list(stats_dict['RANK_PTS'].values()))
-    plt.legend(list(stats_dict['SEASON_ID'].values()))
     plt.grid(True)
     plt.title(player+"'s rank evolution")
+    plt.legend()
     plt.show()
