@@ -56,7 +56,7 @@ def plot_data(player):
             autopct=lambda x: '{:.0f}'.format(total * x / 100))
 
     plt.title(player + "'s personal stats for the " + season + " season")
-    plt.show()
+    plt.draw()
 
 def player_rank_evo(player):
     rows_list = extract_csv_data(player)
@@ -77,4 +77,4 @@ def player_rank_evo(player):
     plt.grid(True)
     plt.title(player+"'s rank evolution")
     plt.legend()
-    plt.show()
+    plt.draw()

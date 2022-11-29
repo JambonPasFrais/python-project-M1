@@ -1,5 +1,6 @@
 import os
 import player_plot
+import matplotlib.pyplot as plt
 
 #get the list of all the files in the players_stats directory
 players_list = os.listdir("../Scrapping/players_stats")
@@ -18,5 +19,6 @@ try:
     else:
         player_plot.plot_data(players_list[choice - 1])
         player_plot.player_rank_evo(players_list[choice - 1])
+        plt.show()
 except:
     print("Invalid input, try again")
