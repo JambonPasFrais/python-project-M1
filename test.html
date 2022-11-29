@@ -1,0 +1,23 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>pytest</title>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <py-env>
+        - paths:
+            - test.py
+    </py-env>
+</head>
+<body>
+<h1 id="pi">xxx</h1>
+
+<py-script>
+    from test import wallis
+
+    pi = wallis(100000)
+    s = f"π est approximativement {pi:.3f}"
+    pyscript.write('pi', s)
+</py-script>
+</body>
+</html>
