@@ -1,8 +1,8 @@
 from nba_api.stats.endpoints import playercareerstats
+from nba_api.stats.endpoints import playerdashboardbyyearoveryear
 import matplotlib.pyplot as plt
 import pandas as pd
 import csv
-
 
 def extract_csv_data(player):
     with open("../Scrapping/players_stats/" + player + ".csv", mode="r") as infile:
@@ -77,4 +77,23 @@ def player_rank_evo(player):
     plt.grid(True)
     plt.title(player+"'s rank evolution")
     plt.legend()
+    plt.draw()
+
+def plus_minus(player):
+    rows_list = extract_csv_data(player)
+    player_id = rows_list[1][0]
+    stats = playerdashboardbyyearoveryear.PlayerDashboardByYearOverYear(player_id=player_id,per_mode_detailed="PerGame").get_data_frames()[1]
+    plus_minus_stats = stats[['GROUP_VALUE','PLUS_MINUS']].to_dict()
+    mean = 0
+    #Plot
+    plt.figure()
+    plt.plot(list(plus_minus_stats['GROUP_VALUE'].values()), list(plus_minus_stats['PLUS_MINUS'].values()), "-", color='black')
+    for i in range(len(list(plus_minus_stats['GROUP_VALUE'].values()))):
+        plt.plot(list(plus_minus_stats['GROUP_VALUE'].values())[i],list(plus_minus_stats['PLUS_MINUS'].values())[i], "o")
+        mean+=list(plus_minus_stats['PLUS_MINUS'].values())[i]
+    mean/=len(list(plus_minus_stats['PLUS_MINUS'].values()))
+    plt.gca().invert_xaxis()
+    plt.gca().set_yticks(list(plus_minus_stats['PLUS_MINUS'].values()))
+    plt.title(player + "'s +/- evolution\nmean="+str(mean))
+    plt.grid()
     plt.draw()
