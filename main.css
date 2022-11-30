@@ -92,11 +92,11 @@ dl {
 }
 
 a {
-  color: #ffc800;
+  color: #E98F3E;
   text-decoration: underline;
 }
 a:hover {
-  color: #cca000;
+  color: #E98F3E;
 }
 
 img,
@@ -238,7 +238,7 @@ svg {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
-  color: #ffc800;
+  color: #E98F3E;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
@@ -494,7 +494,7 @@ p {
   font-weight: 700;
 }
 #mainNav .navbar-brand {
-  color: #ffc800;
+  color: #E98F3E;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-weight: 700;
   letter-spacing: 0.0625em;
@@ -507,7 +507,7 @@ p {
   letter-spacing: 0.0625em;
 }
 #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
-  color: #ffc800;
+  color: #E98F3E;
 }
 
 @media (min-width: 992px) {
@@ -683,7 +683,7 @@ header.masthead li span {
   }
   .timeline > li {
     min-height: 100px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
   }
   .timeline > li .timeline-panel {
     float: left;
@@ -734,6 +734,9 @@ header.masthead li span {
   .timeline > li.timeline-inverted > .timeline-panel {
     padding: 0 100px 20px 20px;
   }
+}
+.list-group-item{
+  padding-bottom: 1rem;
 }
 .team-member {
   margin-bottom: 3rem;
