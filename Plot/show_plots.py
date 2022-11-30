@@ -36,6 +36,6 @@ try:
     if choice > len(teams_list) or choice < 1:
         print("Invalid choice, try again")
     else:
-        team_plot.plot_data(teams_list[choice - 1])
+        team_plot.plot_evolution(teams_list[choice - 1])
 except:
     print("Invalid input, try again")
