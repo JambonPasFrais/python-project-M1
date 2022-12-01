@@ -16,6 +16,8 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="../main.css" rel="stylesheet" />
+  <link href="../players.css" rel="stylesheet" />
+
   <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   <py-env>
     - paths:
@@ -33,14 +35,34 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-        <li class="nav-item"><a class="nav-link me-lg-3" href="/html/players.html"><i class="fa-solid fa-person-running"></i> Players</a></li>
-        <li class="nav-item"><a class="nav-link me-lg-3" href="/html/teams.html"><i class="fa-solid fa-basketball"></i> Teams</a></li>
+        <li class="nav-item"><a class="nav-link me-lg-3" href="./players.html"><i class="fa-solid fa-person-running"></i> Players</a></li>
+        <li class="nav-item"><a class="nav-link me-lg-3" href="./teams.html"><i class="fa-solid fa-basketball"></i> Teams</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
 <section class="page-section">
+  <div class="container">
+  <label class="dropdown">
+
+  <div class="dd-button">
+    Dropdown
+  </div>
+
+  <input type="checkbox" class="dd-input" id="test">
+
+  <ul class="dd-menu">
+    <li>Action</li>
+    <li>Another action</li>
+    <li>Something else here</li>
+    <li class="divider"></li>
+    <li>
+      <a href="http://rane.io">Link to Rane.io</a>
+    </li>
+  </ul>
+
+</label>
   <h1 id="pi">xxx</h1>
 
   <py-script>
@@ -50,6 +72,7 @@
       s = f"π est approximativement {pi:.3f}"
       pyscript.write('pi', s)
   </py-script>
+</div>
 </section>
 
 <footer class="footer py-4">
