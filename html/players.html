@@ -28,49 +28,54 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
   <div class="container px-5">
-    <img src="../assets/img/YNBA.svg" height="75" class="navbar-brand fw-bold" href="/main.html">
+    <a href="../main.html"><img src="../assets/img/YNBA.svg" height="75" class="navbar-brand fw-bold" href="/main.html"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       Menu
       <i class="bi-list"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-        <li class="nav-item"><a class="nav-link me-lg-3" href="./players.html"><i class="fa-solid fa-person-running"></i> Players</a></li>
-        <li class="nav-item"><a class="nav-link me-lg-3" href="./teams.html"><i class="fa-solid fa-basketball"></i> Teams</a></li>
+        <li class="nav-item"><a class="nav-link me-lg-3" href="/html/players.html"><i class="fa-solid fa-person-running"></i> Players</a></li>
+        <li class="nav-item"><a class="nav-link me-lg-3" href="/html/teams.html"><i class="fa-solid fa-basketball"></i> Teams</a></li>
       </ul>
     </div>
   </div>
 </nav>
-
 <section class="page-section">
   <div class="container">
-  <label class="dropdown">
+    <div class="row">
+      <div class="col-lg-3">
+<label for="list">Choose a car:</label>
 
-  <div class="dd-button">
-    Dropdown
+<select id="list">
+  <option value="One">One</option>
+  <option value="Two">Two</option>
+  <option value="Three">Three</option>
+  <option value="Blank Test">Four</option>
+</select>
+      </div>
+    </div>
+
   </div>
+</section>
+<section class="page-section">
+  <div class="container">
 
-  <input type="checkbox" class="dd-input" id="test">
-
-  <ul class="dd-menu">
-    <li>Action</li>
-    <li>Another action</li>
-    <li>Something else here</li>
-    <li class="divider"></li>
-    <li>
-      <a href="http://rane.io">Link to Rane.io</a>
-    </li>
-  </ul>
-
-</label>
-  <h1 id="pi">xxx</h1>
+  <h1 id="pi"></h1>
 
   <py-script>
       from test import wallis
+      from js import document
+      from js import console
+      from pyodide import create_proxy
 
-      pi = wallis(100000)
-      s = f"π est approximativement {pi:.3f}"
-      pyscript.write('pi', s)
+      def selectChange(event):
+          pyscript.write('pi', document.getElementById("list").value)
+
+      change_proxy = create_proxy(selectChange)
+      document.getElementById("list").addEventListener("click", change_proxy)
+
+
   </py-script>
 </div>
 </section>
@@ -88,5 +93,6 @@
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

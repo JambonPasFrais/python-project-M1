@@ -294,6 +294,20 @@ svg {
   align-items: center;
 }
 
+.fade:not(.show) {
+  opacity: 0;
+}
+
+.collapse:not(.show) {
+  display: none;
+}
+
+.collapsing {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.35s ease;
+}
+
 .navbar-toggler {
   padding: 0.25rem 0.75rem;
   font-size: 1.25rem;
