@@ -20,6 +20,7 @@ try:
         player_plot.plot_data(players_list[choice - 1])
         player_plot.player_rank_evo(players_list[choice - 1])
         player_plot.plus_minus(players_list[choice - 1])
+        player_plot.win_lose(players_list[choice - 1])
         plt.show()
 except:
     print("Invalid input, try again")

@@ -82,7 +82,7 @@ def player_rank_evo(player):
 def plus_minus(player):
     rows_list = extract_csv_data(player)
     player_id = rows_list[1][0]
-    stats = playerdashboardbyyearoveryear.PlayerDashboardByYearOverYear(player_id=player_id,per_mode_detailed="PerGame").get_data_frames()[1]
+    stats = playerdashboardbyyearoveryear.PlayerDashboardByYearOverYear(player_id=player_id).get_data_frames()[1]
     plus_minus_stats = stats[['GROUP_VALUE','PLUS_MINUS']].to_dict()
     mean = 0
     #Plot
@@ -96,4 +96,30 @@ def plus_minus(player):
     plt.gca().set_yticks(list(plus_minus_stats['PLUS_MINUS'].values()))
     plt.title(player + "'s +/- evolution\nmean="+str(mean))
     plt.grid()
+    plt.draw()
+
+def win_lose(player):
+    rows_list = extract_csv_data(player)
+    player_id = rows_list[1][0]
+    stats = playerdashboardbyyearoveryear.PlayerDashboardByYearOverYear(player_id=player_id).get_data_frames()[1]
+    data = stats[['GROUP_VALUE','W','L']].to_dict()
+    rows_count = len(data['GROUP_VALUE'])
+    mean_list = []
+    for i in range(rows_count):
+        temp_mean = 0
+        temp_total = 0
+        for key in data:
+            print(key)
+            if key != "GROUP_VALUE" and key == "W":
+                temp_mean += data[key][i]
+                temp_total += data[key][i]
+            elif key != "GROUP_VALUE":
+                temp_total += data[key][i]
+        temp_mean = temp_mean / temp_total * 100
+        mean_list.append(round(temp_mean, ndigits=2))
+    plt.figure()
+    plt.bar(list(data['GROUP_VALUE'].values()), mean_list)
+    for i,v in enumerate(mean_list):
+        plt.text(i - .3, v + .8, str(v)+"%", color="black", fontweight="bold")
+    plt.title(player+"'s win rate")
     plt.draw()
