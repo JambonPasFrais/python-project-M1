@@ -3,9 +3,18 @@ from nba_api.stats.endpoints import playerdashboardbyyearoveryear
 import matplotlib.pyplot as plt
 import csv
 
+
+def check_players_team(player, team_dict, season):
+    if hasPlayed(player):
+        player_data = extract_csv_data(player)
+        for abrev in list(team_dict.keys()):
+            for rows in player_data[1:]:
+                if rows[4] == abrev and rows[1] == season:
+                    return {'name': player, 'team': abrev}
+    return None
+
 def extract_csv_data(player):
     with open("../Scrapping/players_stats/" + player + ".csv", mode="r") as infile:
-        print(type(player), player)
         reader = csv.reader(infile)
         rows_list = []
         for rows in reader:
@@ -32,7 +41,7 @@ def hasPlayed(player):
     data_list = extract_csv_data(player)
     return  (len(data_list) - 1)
 
-def plot_data(player,season):
+def plot_data(player, team,season):
     rows_list = extract_csv_data(player)
     data_dict = {
         "OREB": rows_list[0].index("OREB"),
@@ -61,9 +70,10 @@ def plot_data(player,season):
             autopct=lambda x: '{:.0f}'.format(total * x / 100))
 
     plt.title(player + "'s personal stats for the " + season + " season")
-    plt.savefig("player_plot_images/general_data.png")
+    plt.savefig("player_plot_images/"+team+"/"+player+"/general_data.png")
+    plt.close()
 
-def player_rank_evo(player):
+def player_rank_evo(player, team):
     rows_list = extract_csv_data(player)
     #get the age of the player for every seasons he played
     global_stats = playercareerstats.PlayerCareerStats(player_id=rows_list[1][0]).get_data_frames()[0]
@@ -84,9 +94,10 @@ def player_rank_evo(player):
     plt.legend()
     plt.xlabel("Age")
     plt.ylabel("Rank")
-    plt.savefig("player_plot_images/rank_evo.png")
+    plt.savefig("player_plot_images/"+team+"/"+player+"/rank_evo.png")
+    plt.close()
 
-def plus_minus(player):
+def plus_minus(player, team):
     rows_list = extract_csv_data(player)
     player_id = rows_list[1][0]
     stats = playerdashboardbyyearoveryear.PlayerDashboardByYearOverYear(player_id=player_id).get_data_frames()[1]
@@ -104,9 +115,10 @@ def plus_minus(player):
     plt.title(player + "'s +/- evolution\nmean="+str(mean))
     plt.grid()
     plt.xlabel("Season")
-    plt.savefig("player_plot_images/plus_minus.png")
+    plt.savefig("player_plot_images/"+team+"/"+player+"/plus_minus.png")
+    plt.close()
 
-def win_lose(player):
+def win_lose(player, team):
     rows_list = extract_csv_data(player)
     player_id = rows_list[1][0]
     stats = playerdashboardbyyearoveryear.PlayerDashboardByYearOverYear(player_id=player_id).get_data_frames()[1]
@@ -129,10 +141,18 @@ def win_lose(player):
     for i,v in enumerate(mean_list):
         plt.text(v + .8, i - .1, str(v)+"%", color="black", fontweight="bold")
     plt.title(player+"'s win rate per season")
-    plt.savefig("player_plot_images/win_lose.png")
+    plt.savefig("player_plot_images/"+team+"/"+player+"/win_lose.png")
+    plt.close()
 
 def plot_all_data(player,season):
-    plot_data(player, season)
-    player_rank_evo(player)
-    plus_minus(player)
-    win_lose(player)
+
+    plot_data(player['name'], player['team'], season)
+    player_rank_evo(player['name'], player['team'])
+    plus_minus(player['name'], player['team'])
+    win_lose(player['name'], player['team'])
+    print("Genration done for "+player['name'])
+
+    plt.close('all')
+
+
+plot_all_data({'name': 'Bam Adebayo','team': 'test'},'2022-23')
