@@ -8,7 +8,7 @@ def save_teams_stats_to_csv(team_stats, team_name):
 
 def scrap_all_teams_data_to_csv(teams):
     teams = teams.get_teams()  # 30 teams in total
-    '''
+
     for team in teams:
         team_id = team['id']
         team_name = team['full_name']
@@ -23,8 +23,8 @@ def scrap_all_teams_data_to_csv(teams):
             continue
 
         print('Team: ', team_name)
-    '''
 
+    '''
     for i in range(0, 5):
         team_id = teams[i]['id']
         team_name = teams[i]['full_name']
@@ -36,5 +36,6 @@ def scrap_all_teams_data_to_csv(teams):
         except:
             print('Error with team: ', team_name)
             continue
+    '''
 
     print('Scraping and saving of teams finished')
