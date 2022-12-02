@@ -28,8 +28,12 @@ def plot_evolution(team):
     plt.show()
 
 # Create a spider plot
-def plot_spider(team, year) :
+def plot_histogram(team) :
     rows_list = extract_csv_data(team)
+    fg_list = []
+    fg2_list = []
+    
+
 
 
 
