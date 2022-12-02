@@ -139,10 +139,10 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Jambon - [@LinkedIn](https://www.linkedin.com/in/armand-deffrennes/)
-Marie - [@LinkedIn](https://www.linkedin.com/in/corentin-denoulet-964821226/)
-Thayo - [@LinkedIn](https://www.linkedin.com/in/marie-pivette)
-Corow - [@LinkedIn](https://www.linkedin.com/in/theo-rondoux-948ba720a/)
+Jambon : [@LinkedIn](https://www.linkedin.com/in/armand-deffrennes/)
+- Marie : [@LinkedIn](https://www.linkedin.com/in/corentin-denoulet-964821226/)
+- Thayo : [@LinkedIn](https://www.linkedin.com/in/marie-pivette)
+- Corow : [@LinkedIn](https://www.linkedin.com/in/theo-rondoux-948ba720a/)
 
 Project Link: [https://github.com/github_username/repo_name](https://github.com/JambonPasFrais/python-project-M1.git)
 
