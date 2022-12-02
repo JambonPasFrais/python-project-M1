@@ -27,9 +27,12 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/JambonPasFrais/python-project-M1">
-    <img src="Website/assets/main/YNBA.svg" alt="Logo" width="100%" height="100%" style="position:float;">
-  </a>
+    <div class="images">
+        <a href="https://github.com/JambonPasFrais/python-project-M1">
+            <img src="Website/assets/main/YNBA.svg" alt="Logo" width="200">
+        </a>
+    </div>
+  
 
 <h3 align="center">YNBA</h3>
 
@@ -68,7 +71,7 @@
 ## About The Project
 
 
-The idea of the projet is simple. We had to use our knowledge in data scrapping, AI and data handling to scrap the NBA's website stats and make some meaningfull plots about them.
+The idea of the project is simple. We had to use our knowledge in data scrapping, AI and data handling to scrap the NBA's website stats and make some meaningfull plots about them.
 As a bonus, we could create an AI that predicts a value from another.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -122,7 +125,7 @@ You will also need to have installed pip and our libraries like so:
    ```sh
    node index.js
    ```
-4. Click on the link in the console and go to localhost:4444
+4. Click on the link in the console and go to http://localhost:4444
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -130,7 +133,7 @@ You will also need to have installed pip and our libraries like so:
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
