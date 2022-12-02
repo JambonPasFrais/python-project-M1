@@ -5,6 +5,7 @@ import csv
 
 def extract_csv_data(player):
     with open("../Scrapping/players_stats/" + player + ".csv", mode="r") as infile:
+        print(type(player), player)
         reader = csv.reader(infile)
         rows_list = []
         for rows in reader:
@@ -48,6 +49,7 @@ def plot_data(player):
             player_data_list.append(temp_dict)
     # Plot
     plt.figure()
+    plt.savefig('test.png')
     total = 0
     for x in player_data_list[0].values():
         total += int(x)
