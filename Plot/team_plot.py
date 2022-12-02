@@ -28,7 +28,6 @@ def plot_evolution(team):
     plt.grid(True)
     plt.title(team + "'s evolution rank")
     plt.savefig("team_plot_images/" + team + " evolution rank.png")
-    plt.show()
 
 # Create a spider plot
 def plot_histogram(team) :
@@ -55,13 +54,12 @@ def plot_histogram(team) :
     plt.grid(True)
     plt.title("Number of 2 points of " + team)
     plt.savefig("team_plot_images/fg2 " + team + ".png")
-    plt.show()
+
     plt.figure()
     plt.bar(list(fg3_dict.values()), list(fg3_dict.keys()))
     plt.grid(True)
     plt.title("Number of 3 points of " + team)
     plt.savefig("team_plot_images/fg3 " + team + ".png")
-    plt.show()
 
 # Create a correlation plot
 def plot_correlation(team):
@@ -79,18 +77,26 @@ def plot_correlation(team):
     df = df.drop('NBA_FINALS_APPEARANCE', axis=1)
     df = df.drop('CONF_RANK', axis=1)
     df = df.drop('CONF_COUNT', axis=1)
+    df = df.drop('WINS', axis=1)
+    df = df.drop('LOSSES', axis=1)
+    df = df.drop('WIN_PCT', axis=1)
+    df = df.drop('OREB', axis=1)
+    df = df.drop('DREB', axis=1)
+    df = df.drop('REB', axis=1)
+    df = df.drop('STL', axis=1)
+    df = df.drop('TOV', axis=1)
+    df = df.drop('BLK', axis=1)
     sns.heatmap(df.corr())
     plt.savefig("team_plot_images/correlation " + team + ".png")
-    plt.show()
 
 
 
 # Test
 team1 = "Cleveland Cavaliers"
 team2 = "Chicago Bulls"
-plot_evolution(team1)
-plot_evolution(team2)
-plot_histogram(team1)
-plot_histogram(team2)
+#plot_evolution(team1)
+#plot_evolution(team2)
+#plot_histogram(team1)
+#plot_histogram(team2)
 plot_correlation(team1)
 plot_correlation(team2)
