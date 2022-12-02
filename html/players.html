@@ -43,23 +43,22 @@
       <div class="col-lg-4">
         <select id="list" class="ddl-select">
           <option disabled>Cleveland Cavaliers</option>
-          <option value="player_plot_images">Jarett Allen</option>
-          <option value="Jarett Allen">Jarett Allen</option>
-          <option value="Mamadi Diakite">Mamadi Diakite</option>
-          <option value="Darius Garland">Darius Garland</option>
-          <option value="Caris LeVert">Caris LeVert</option>
-          <option value="Robin Lopez">Robin Lopez</option>
-          <option value="Kevin Love">Kevin Love</option>
-          <option value="Donovan Mitchell">Donovan Mitchell</option>
-          <option value="Evan Mobley">Evan Mobley</option>
-          <option value="Isaiah Mobley">Isaiah Mobley</option>
-          <option value="Paul Neto">Paul Neto</option>
-          <option value="Isaac Okoro">Isaac Okoro</option>
-          <option value="Cedi Osman">Cedi Osman</option>
-          <option value="Ricky Rubio">Ricky Rubio</option>
-          <option value="Lamar Stevens">Lamar Stevens</option>
-          <option value="Dead Wade">Dead Wade</option>
-          <option value="Dylan Windler">Dylan Windler</option>
+          <option>Jarett Allen</option>
+          <option>Mamadi Diakite</option>
+          <option>Darius Garland</option>
+          <option>Caris LeVert</option>
+          <option>Robin Lopez</option>
+          <option>Kevin Love</option>
+          <option>Donovan Mitchell</option>
+          <option>Evan Mobley</option>
+          <option>Isaiah Mobley</option>
+          <option>Paul Neto</option>
+          <option>Isaac Okoro</option>
+          <option>Cedi Osman</option>
+          <option>Ricky Rubio</option>
+          <option>Lamar Stevens</option>
+          <option>Dead Wade</option>
+          <option>Dylan Windler</option>
         </select>
       </div>
     </div>
@@ -73,7 +72,8 @@
         <img id="photo">
       </div>
       <div class="col-lg-8 col-md-8">
-        <h1 id="pi"></h1>
+        <h1 id="player">Jarett Allen</h1>
+        <h4 id="team"></h4>
       </div>
     </div>
 
@@ -115,12 +115,18 @@
       from pyodide import create_proxy
 
       def selectChange(event):
-        pyscript.write('pi', document.getElementById("list").value)
-        document.getElementById("photo").src = "../Plot/" + document.getElementById("list").value + "/profil.png"
-        document.getElementById("test").src = "../Plot/" + document.getElementById("list").value + "/general_data.png"
-        document.getElementById("test2").src = "../Plot/" + document.getElementById("list").value + "/plus_minus.png"
-        document.getElementById("test3").src = "../Plot/" + document.getElementById("list").value + "/rank_evo.png"
-        document.getElementById("test4").src = "../Plot/" + document.getElementById("list").value + "/win_lose.png"
+        if int(document.getElementById("list").selectedIndex) < 16 :
+          team = 'CLE'
+        else :
+          team = 'CHI'
+
+        pyscript.write('player', document.getElementById("list").value)
+        pyscript.write('team', team)
+        document.getElementById("photo").src = "../assets/players/" + document.getElementById("list").value + ".png"
+        document.getElementById("test").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/general_data.png"
+        document.getElementById("test2").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/plus_minus.png"
+        document.getElementById("test3").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/rank_evo.png"
+        document.getElementById("test4").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/win_lose.png"
 
       change_proxy = create_proxy(selectChange)
       document.getElementById("list").addEventListener("click", change_proxy)
