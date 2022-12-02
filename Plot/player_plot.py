@@ -158,7 +158,7 @@ def plot_all_data(player,season):
         win_lose(player['name'], player['team'])
         print("Genration done for "+player['name'])
     except Exception as e:
-        print("An error as occured for "+player+": " + str(e))
+        print("An error as occured for "+player['name']+": " + str(e))
     plt.close('all')
 
 #player_rank_evo('Andre Drummond','CHI')
