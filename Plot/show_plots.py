@@ -1,7 +1,7 @@
 import os
 import player_plot
 import matplotlib.pyplot as plt
-import team_plot
+import team_plot as tp
 
 #get the list of all the files in the players_stats directory
 players_list = os.listdir("../Scrapping/players_stats")
@@ -35,20 +35,12 @@ try:
 except:
     print("Invalid input, try again")
 
-"""teams_list = os.listdir("../Scrapping/teams_stats")
-teams_list.sort()
-print("Choose the team :")
-#Remove .csv extension and print the name of the player
-for i in range(len(teams_list)):
-    teams_list[i] = teams_list[i].replace('.csv','')
-    print(str(i+1)+". "+teams_list[i])
-
-
-try:
-    choice = int(input("Enter your choice: "))
-    if choice > len(teams_list) or choice < 1:
-        print("Invalid choice, try again")
-    else:
-        team_plot.plot_evolution(teams_list[choice - 1])
-except:
-    print("Invalid input, try again")"""
+# Get team plot's images
+team1 = "Cleveland Cavaliers"
+team2 = "Chicago Bulls"
+tp.plot_evolution(team1)
+tp.plot_evolution(team2)
+tp.plot_histogram(team1)
+tp.plot_histogram(team2)
+tp.plot_correlation(team1)
+tp.plot_correlation(team2)
