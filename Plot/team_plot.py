@@ -2,7 +2,6 @@ from nba_api.stats.endpoints import playercareerstats
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-import numpy as np
 import csv
 
 def extract_csv_data(team):
@@ -50,16 +49,18 @@ def plot_histogram(team) :
     fg3_dict = dict(sorted(fg3_dict.items(), key=lambda item: int(item[1])))
 
     plt.figure()
-    plt.bar(list(fg2_dict.values()), list(fg2_dict.keys()))
+    plt.barh(list(fg2_dict.keys()), list(fg2_dict.values()))
     plt.grid(True)
     plt.title("Number of 2 points of " + team)
-    plt.savefig("team_plot_images/fg2 " + team + ".png")
+    #plt.savefig("team_plot_images/fg2 " + team + ".png")
+    plt.show()
 
     plt.figure()
-    plt.bar(list(fg3_dict.values()), list(fg3_dict.keys()))
+    plt.barh(list(fg3_dict.keys()), list(fg3_dict.values()))
     plt.grid(True)
     plt.title("Number of 3 points of " + team)
-    plt.savefig("team_plot_images/fg3 " + team + ".png")
+    #plt.savefig("team_plot_images/fg3 " + team + ".png")
+    plt.show()
 
 # Create a correlation plot
 def plot_correlation(team):
@@ -96,7 +97,7 @@ team1 = "Cleveland Cavaliers"
 team2 = "Chicago Bulls"
 #plot_evolution(team1)
 #plot_evolution(team2)
-#plot_histogram(team1)
+plot_histogram(team1)
 #plot_histogram(team2)
-plot_correlation(team1)
-plot_correlation(team2)
+#plot_correlation(team1)
+#plot_correlation(team2)
