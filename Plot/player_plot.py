@@ -32,7 +32,7 @@ def hasPlayed(player):
     data_list = extract_csv_data(player)
     return  (len(data_list) - 1)
 
-def plot_data(player):
+def plot_data(player,season):
     rows_list = extract_csv_data(player)
     data_dict = {
         "OREB": rows_list[0].index("OREB"),
@@ -44,7 +44,7 @@ def plot_data(player):
         "FGA": rows_list[0].index("FGA")
     }
     player_data_list = []
-    season = wait_choice(rows_list[1:],rows_list[0].index("SEASON_ID"), "personal data")
+    #season = wait_choice(rows_list[1:],rows_list[0].index("SEASON_ID"), "personal data")*
     for list in rows_list[1:]:
         temp_dict = {}
         if list[1] == season:
@@ -130,3 +130,9 @@ def win_lose(player):
         plt.text(v + .8, i - .1, str(v)+"%", color="black", fontweight="bold")
     plt.title(player+"'s win rate per season")
     plt.savefig("player_plot_images/win_lose.png")
+
+def plot_all_data(player,season):
+    plot_data(player, season)
+    player_rank_evo(player)
+    plus_minus(player)
+    win_lose(player)
