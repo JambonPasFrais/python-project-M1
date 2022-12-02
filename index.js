@@ -10,7 +10,7 @@ http.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/main.html");
+    res.sendFile(__dirname + "/index.html");
 });
 
 app.use("/assets", express.static(__dirname + "/assets"));
