@@ -30,9 +30,37 @@ def plot_evolution(team):
 # Create a spider plot
 def plot_histogram(team) :
     rows_list = extract_csv_data(team)
-    fg_list = []
     fg2_list = []
-    
+    fg3_list = []
+    season_list = []
+    for i in range(len(rows_list)-10, len(rows_list)):
+        fg2_list.append(rows_list[i][18])
+        fg3_list.append(rows_list[i][21])
+        season_list.append(rows_list[i][3])
+
+    fg2_dict = {}
+    fg3_dict = {}
+    for i in range(len(season_list)):
+        fg2_dict[season_list[i]] = fg2_list[i]
+    fg2_dict = dict(sorted(fg2_dict.items(), key=lambda item: int(item[1])))
+    for i in range(len(season_list)):
+        fg3_dict[season_list[i]] = fg3_list[i]
+    fg3_dict = dict(sorted(fg3_dict.items(), key=lambda item: int(item[1])))
+
+
+
+    plt.figure()
+    plt.bar(list(fg2_dict.values()), list(fg2_dict.keys()))
+    plt.grid(True)
+    plt.title("Number of 2 points of " + team)
+    plt.savefig("team_plot_images/fg2.png")
+    plt.show()
+    plt.figure()
+    plt.bar(list(fg3_dict.values()), list(fg3_dict.keys()))
+    plt.grid(True)
+    plt.title("Number of 3 points of " + team)
+    plt.savefig("team_plot_images/fg3.png")
+    plt.show()
 
 
 
@@ -40,4 +68,4 @@ def plot_histogram(team) :
 
 # Test
 team = "Atlanta Hawks"
-year = "2017-18"
+plot_histogram(team)
