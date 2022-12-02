@@ -567,7 +567,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #212529;
-  background-image: url("assets/img/fond.svg");
+  background-image: url("./Website/assets/img/fond.svg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;

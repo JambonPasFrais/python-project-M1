@@ -7,7 +7,7 @@
   <meta name="author" content="" />
   <title>YNBA</title>
   <!-- Favicon-->
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
   <!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="../main.css" rel="stylesheet" />
+  <link href="../../index.css" rel="stylesheet" />
   <link href="../css/players.css" rel="stylesheet" />
 
   <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
@@ -24,15 +24,15 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
   <div class="container px-5">
-    <a href="../main.html"><img src="../assets/img/YNBA.svg" height="75" class="navbar-brand fw-bold" href="/main.html"></a>
+    <a href="../../index.html"><img src="../assets/img/YNBA.svg" height="75" class="navbar-brand fw-bold"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       Menu
       <i class="bi-list"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-        <li class="nav-item"><a class="nav-link me-lg-3" href="/html/players.html"><i class="fa-solid fa-person-running"></i> Players</a></li>
-        <li class="nav-item"><a class="nav-link me-lg-3" href="/html/teams.html"><i class="fa-solid fa-basketball"></i> Teams</a></li>
+        <li class="nav-item"><a class="nav-link me-lg-3" href="./players.html"><i class="fa-solid fa-person-running"></i> Players</a></li>
+        <li class="nav-item"><a class="nav-link me-lg-3" href="./teams.html"><i class="fa-solid fa-basketball"></i> Teams</a></li>
       </ul>
     </div>
   </div>
@@ -123,10 +123,10 @@
         pyscript.write('player', document.getElementById("list").value)
         pyscript.write('team', team)
         document.getElementById("photo").src = "../assets/players/" + document.getElementById("list").value + ".png"
-        document.getElementById("test").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/general_data.png"
-        document.getElementById("test2").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/plus_minus.png"
-        document.getElementById("test3").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/rank_evo.png"
-        document.getElementById("test4").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/win_lose.png"
+        document.getElementById("test").src = "../../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/general_data.png"
+        document.getElementById("test2").src = "../../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/plus_minus.png"
+        document.getElementById("test3").src = "../../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/rank_evo.png"
+        document.getElementById("test4").src = "../../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/win_lose.png"
 
       change_proxy = create_proxy(selectChange)
       document.getElementById("list").addEventListener("click", change_proxy)
