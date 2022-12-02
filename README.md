@@ -28,6 +28,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/JambonPasFrais/python-project-M1">
+    <img src="assets/img/YNBA.svg" alt="Logo" width="100%" height="100%" style="position:float;">
     <img src="assets/img/YNBA.svg" alt="Logo" width="80" height="80">
   </a>
 
@@ -77,11 +78,11 @@ As a bonus, we could create an AI that predicts a value from another.
 
 ### Built With
 
-* [![Pandas][Pandas]][Pandas-url]
-* [![matplotlib][matplotlib]][matplotlib-url]
-* [![Node.js][node.js]][node.js-url]
-* [![Pyscript][pyscript]][pyscript-url]
-* [![NBA_api][nba_api]][nba_api-url]
+* [![Pandas][Pandas-url]
+* [![matplotlib]][matplotlib-url]
+* [![Node.js]][node.js-url]
+* [![Pyscript]][pyscript-url]
+* [![NBA_api]][nba_api-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -139,15 +140,14 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Jambon - Jambon#3656 - [@LinkedIn](https://www.linkedin.com/in/armand-deffrennes/)
-Marie - Patate#2767 - [@LinkedIn](https://www.linkedin.com/in/corentin-denoulet-964821226/)
-Thayo - Thayo#2805 - [@LinkedIn](https://www.linkedin.com/in/marie-pivette)
-Corow - Corow#5024 - [@LinkedIn](https://www.linkedin.com/in/theo-rondoux-948ba720a/)
+Jambon - [@LinkedIn](https://www.linkedin.com/in/armand-deffrennes/)
+Marie - [@LinkedIn](https://www.linkedin.com/in/corentin-denoulet-964821226/)
+Thayo - [@LinkedIn](https://www.linkedin.com/in/marie-pivette)
+Corow - [@LinkedIn](https://www.linkedin.com/in/theo-rondoux-948ba720a/)
 
 Project Link: [https://github.com/github_username/repo_name](https://github.com/JambonPasFrais/python-project-M1.git)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
@@ -165,7 +165,7 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [matplotlib]: https://matplotlib.org/_static/images/logo_dark.svg
 [matplotlib-url]: https://matplotlib.org/
 [node.js]: https://nodejs.org/static/images/logo.svg
-[nods.js-url]: https://nodejs.org/en/
+[node.js-url]: https://nodejs.org/en/
 [pyscript]: https://pyscript.net/assets/images/pyscript-sticker-black.svg
 [pyscript-url]: https://pyscript.net/
 [nba_api]: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
