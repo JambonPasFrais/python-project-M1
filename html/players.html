@@ -16,13 +16,9 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="../main.css" rel="stylesheet" />
-  <link href="../players.css" rel="stylesheet" />
+  <link href="../css/players.css" rel="stylesheet" />
 
   <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-  <py-env>
-    - paths:
-      - ../test.py
-  </py-env>
 </head>
 <body id="page-top">
 <!-- Navigation-->
@@ -41,43 +37,95 @@
     </div>
   </div>
 </nav>
-<section class="page-section">
+<section class="page-section bg-light">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3">
-<label for="list">Choose a car:</label>
-
-<select id="list">
-  <option value="One">One</option>
-  <option value="Two">Two</option>
-  <option value="Three">Three</option>
-  <option value="Blank Test">Four</option>
-</select>
+      <div class="col-lg-4">
+        <select id="list" class="ddl-select">
+          <option disabled>Cleveland Cavaliers</option>
+          <option value="player_plot_images">Jarett Allen</option>
+          <option value="Jarett Allen">Jarett Allen</option>
+          <option value="Mamadi Diakite">Mamadi Diakite</option>
+          <option value="Darius Garland">Darius Garland</option>
+          <option value="Caris LeVert">Caris LeVert</option>
+          <option value="Robin Lopez">Robin Lopez</option>
+          <option value="Kevin Love">Kevin Love</option>
+          <option value="Donovan Mitchell">Donovan Mitchell</option>
+          <option value="Evan Mobley">Evan Mobley</option>
+          <option value="Isaiah Mobley">Isaiah Mobley</option>
+          <option value="Paul Neto">Paul Neto</option>
+          <option value="Isaac Okoro">Isaac Okoro</option>
+          <option value="Cedi Osman">Cedi Osman</option>
+          <option value="Ricky Rubio">Ricky Rubio</option>
+          <option value="Lamar Stevens">Lamar Stevens</option>
+          <option value="Dead Wade">Dead Wade</option>
+          <option value="Dylan Windler">Dylan Windler</option>
+        </select>
       </div>
     </div>
 
   </div>
 </section>
-<section class="page-section">
+<section class="page-section bg-light">
   <div class="container">
+    <div class="row margin-row">
+      <div class="col-lg-4 col-md-4">
+        <img id="photo">
+      </div>
+      <div class="col-lg-8 col-md-8">
+        <h1 id="pi"></h1>
+      </div>
+    </div>
 
-  <h1 id="pi"></h1>
-
+    <div class="row">
+      <div class="col-lg-4 col-md-4">
+        <img class="plot" id="test">
+      </div>
+      <div class="col-lg-8 col-md-8">
+        Explanations
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 col-md-8">
+        Explanations
+      </div>
+      <div class="col-lg-4 col-md-4">
+        <img class="plot" id="test2">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-4">
+        <img class="plot" id="test3">
+      </div>
+      <div class="col-lg-8 col-md-8">
+        Explanations
+      </div>
+    </div>
+  <div class="row">
+      <div class="col-lg-8 col-md-8">
+        Explanations
+      </div>
+      <div class="col-lg-4 col-md-4">
+        <img class="plot" id="test4">
+      </div>
+    </div>
+  </div>
   <py-script>
-      from test import wallis
       from js import document
-      from js import console
       from pyodide import create_proxy
 
       def selectChange(event):
-          pyscript.write('pi', document.getElementById("list").value)
+        pyscript.write('pi', document.getElementById("list").value)
+        document.getElementById("photo").src = "../Plot/" + document.getElementById("list").value + "/profil.png"
+        document.getElementById("test").src = "../Plot/" + document.getElementById("list").value + "/general_data.png"
+        document.getElementById("test2").src = "../Plot/" + document.getElementById("list").value + "/plus_minus.png"
+        document.getElementById("test3").src = "../Plot/" + document.getElementById("list").value + "/rank_evo.png"
+        document.getElementById("test4").src = "../Plot/" + document.getElementById("list").value + "/win_lose.png"
 
       change_proxy = create_proxy(selectChange)
       document.getElementById("list").addEventListener("click", change_proxy)
-
-
   </py-script>
-</div>
+  </div>
 </section>
 
 <footer class="footer py-4">
