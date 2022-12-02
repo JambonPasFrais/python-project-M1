@@ -19,14 +19,15 @@ try:
         print("Invalid choice, try again")
     else:
         player_plot.plot_data(players_list[choice - 1])
+        print("Generating plots...")
         player_plot.player_rank_evo(players_list[choice - 1])
         player_plot.plus_minus(players_list[choice - 1])
         player_plot.win_lose(players_list[choice - 1])
-        plt.show()
+        print("Files generated ! You can find them in the player_plot_images folder.")
 except:
     print("Invalid input, try again")
 
-teams_list = os.listdir("../Scrapping/teams_stats")
+"""teams_list = os.listdir("../Scrapping/teams_stats")
 teams_list.sort()
 print("Choose the team :")
 #Remove .csv extension and print the name of the player
@@ -42,4 +43,4 @@ try:
     else:
         team_plot.plot_data(teams_list[choice - 1])
 except:
-    print("Invalid input, try again")
+    print("Invalid input, try again")"""

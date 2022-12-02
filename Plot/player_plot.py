@@ -55,7 +55,7 @@ def plot_data(player):
             autopct=lambda x: '{:.0f}'.format(total * x / 100))
 
     plt.title(player + "'s personal stats for the " + season + " season")
-    plt.draw()
+    plt.savefig("player_plot_images/general_data.png")
 
 def player_rank_evo(player):
     rows_list = extract_csv_data(player)
@@ -76,7 +76,9 @@ def player_rank_evo(player):
     plt.grid(True)
     plt.title(player+"'s rank evolution")
     plt.legend()
-    plt.draw()
+    plt.xlabel("Age")
+    plt.ylabel("Rank")
+    plt.savefig("player_plot_images/rank_evo.png")
 
 def plus_minus(player):
     rows_list = extract_csv_data(player)
@@ -95,7 +97,8 @@ def plus_minus(player):
     plt.gca().set_yticks(list(plus_minus_stats['PLUS_MINUS'].values()))
     plt.title(player + "'s +/- evolution\nmean="+str(mean))
     plt.grid()
-    plt.draw()
+    plt.xlabel("Season")
+    plt.savefig("player_plot_images/plus_minus.png")
 
 def win_lose(player):
     rows_list = extract_csv_data(player)
@@ -108,7 +111,6 @@ def win_lose(player):
         temp_mean = 0
         temp_total = 0
         for key in data:
-            print(key)
             if key != "GROUP_VALUE" and key == "W":
                 temp_mean += data[key][i]
                 temp_total += data[key][i]
@@ -117,8 +119,8 @@ def win_lose(player):
         temp_mean = temp_mean / temp_total * 100
         mean_list.append(round(temp_mean, ndigits=2))
     plt.figure()
-    plt.bar(list(data['GROUP_VALUE'].values()), mean_list)
+    plt.barh(list(data['GROUP_VALUE'].values()), mean_list)
     for i,v in enumerate(mean_list):
-        plt.text(i - .3, v + .8, str(v)+"%", color="black", fontweight="bold")
-    plt.title(player+"'s win rate")
-    plt.draw()
+        plt.text(v + .8, i - .1, str(v)+"%", color="black", fontweight="bold")
+    plt.title(player+"'s win rate per season")
+    plt.savefig("player_plot_images/win_lose.png")
