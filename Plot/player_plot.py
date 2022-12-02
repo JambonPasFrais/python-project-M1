@@ -28,6 +28,10 @@ def wait_choice(choice_list,index,text):
 
     return choice_list[choice-1][index]
 
+def hasPlayed(player):
+    data_list = extract_csv_data(player)
+    return  (len(data_list) - 1)
+
 def plot_data(player):
     rows_list = extract_csv_data(player)
     data_dict = {

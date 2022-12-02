@@ -18,12 +18,16 @@ try:
     if choice > len(players_list) or choice < 1:
         print("Invalid choice, try again")
     else:
-        player_plot.plot_data(players_list[choice - 1])
-        print("Generating plots...")
-        player_plot.player_rank_evo(players_list[choice - 1])
-        player_plot.plus_minus(players_list[choice - 1])
-        player_plot.win_lose(players_list[choice - 1])
-        print("Files generated ! You can find them in the player_plot_images folder.")
+        has_played = player_plot.hasPlayed(players_list[choice - 1])
+        if has_played > 0:
+            player_plot.plot_data(players_list[choice - 1])
+            print("Generating plots...")
+            player_plot.player_rank_evo(players_list[choice - 1])
+            player_plot.plus_minus(players_list[choice - 1])
+            player_plot.win_lose(players_list[choice - 1])
+            print("Files generated ! You can find them in the player_plot_images folder.")
+        else:
+            print("The player has not played yet.")
 except:
     print("Invalid input, try again")
 
