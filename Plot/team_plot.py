@@ -1,6 +1,8 @@
 from nba_api.stats.endpoints import playercareerstats
 import matplotlib.pyplot as plt
 import pandas as pd
+import seaborn as sns
+import numpy as np
 import csv
 
 def extract_csv_data(team):
@@ -24,7 +26,8 @@ def plot_evolution(team):
     plt.figure()
     plt.plot(season_list, rank_list, "-", color="blue", marker='o')
     plt.grid(True)
-    plt.title(team + "'s rank evolution")
+    plt.title(team + "'s evolution rank")
+    plt.savefig("team_plot_images/" + team + " evolution rank.png")
     plt.show()
 
 # Create a spider plot
@@ -47,25 +50,47 @@ def plot_histogram(team) :
         fg3_dict[season_list[i]] = fg3_list[i]
     fg3_dict = dict(sorted(fg3_dict.items(), key=lambda item: int(item[1])))
 
-
-
     plt.figure()
     plt.bar(list(fg2_dict.values()), list(fg2_dict.keys()))
     plt.grid(True)
     plt.title("Number of 2 points of " + team)
-    plt.savefig("team_plot_images/fg2.png")
+    plt.savefig("team_plot_images/fg2 " + team + ".png")
     plt.show()
     plt.figure()
     plt.bar(list(fg3_dict.values()), list(fg3_dict.keys()))
     plt.grid(True)
     plt.title("Number of 3 points of " + team)
-    plt.savefig("team_plot_images/fg3.png")
+    plt.savefig("team_plot_images/fg3 " + team + ".png")
+    plt.show()
+
+# Create a correlation plot
+def plot_correlation(team):
+    df = pd.read_csv("../Scrapping/teams_stats/" + team + ".csv")
+    df = df.drop('TEAM_ID', axis=1)
+    df = df.drop('TEAM_NAME', axis=1)
+    df = df.drop('TEAM_CITY', axis=1)
+    df = df.drop('YEAR', axis=1)
+    df = df.drop('GP', axis=1)
+    df = df.drop('DIV_RANK', axis=1)
+    df = df.drop('DIV_COUNT', axis=1)
+    df = df.drop('PO_WINS', axis=1)
+    df = df.drop('PO_LOSSES', axis=1)
+    df = df.drop('PTS_RANK', axis=1)
+    df = df.drop('NBA_FINALS_APPEARANCE', axis=1)
+    df = df.drop('CONF_RANK', axis=1)
+    df = df.drop('CONF_COUNT', axis=1)
+    sns.heatmap(df.corr())
+    plt.savefig("team_plot_images/correlation " + team + ".png")
     plt.show()
 
 
 
-
-
 # Test
-team = "Atlanta Hawks"
-plot_histogram(team)
+team1 = "Cleveland Cavaliers"
+team2 = "Chicago Bulls"
+plot_evolution(team1)
+plot_evolution(team2)
+plot_histogram(team1)
+plot_histogram(team2)
+plot_correlation(team1)
+plot_correlation(team2)
