@@ -29,7 +29,6 @@
 <div align="center">
   <a href="https://github.com/JambonPasFrais/python-project-M1">
     <img src="assets/img/YNBA.svg" alt="Logo" width="100%" height="100%" style="position:float;">
-    <img src="assets/img/YNBA.svg" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">YNBA</h3>
@@ -78,7 +77,7 @@ As a bonus, we could create an AI that predicts a value from another.
 
 ### Built With
 
-* [![Pandas][Pandas-url]
+* [![Pandas]][Pandas-url]
 * [![matplotlib]][matplotlib-url]
 * [![Node.js]][node.js-url]
 * [![Pyscript]][pyscript-url]
