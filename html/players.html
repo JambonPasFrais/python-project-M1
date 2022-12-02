@@ -24,7 +24,7 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
   <div class="container px-5">
-    <a href="../main.html"><img src="../assets/img/YNBA.svg" height="75" class="navbar-brand fw-bold" href="/main.html"></a>
+    <a href="../main.html"><img src="../assets/main/YNBA.svg" height="75" class="navbar-brand fw-bold" href="/main.html"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       Menu
       <i class="bi-list"></i>
@@ -69,17 +69,17 @@
   <div class="container">
     <div class="row margin-row">
       <div class="col-lg-4 col-md-4">
-        <img id="photo">
+        <img id="photo" src="../assets/players/Jarrett%20Allen.png">
       </div>
       <div class="col-lg-8 col-md-8">
         <h1 id="player">Jarett Allen</h1>
-        <h4 id="team"></h4>
+        <h4 id="team">Cleveland Cavaliers</h4>
       </div>
     </div>
 
     <div class="row">
       <div class="col-lg-4 col-md-4">
-        <img class="plot" id="test">
+        <img class="plot" id="general" src="../Plot/player_plot_images/CLE/Jarrett%20Allen/general_data.png">
       </div>
       <div class="col-lg-8 col-md-8">
         Explanations
@@ -90,12 +90,12 @@
         Explanations
       </div>
       <div class="col-lg-4 col-md-4">
-        <img class="plot" id="test2">
+        <img class="plot" id="plus-minus" src="../Plot/player_plot_images/CLE/Jarrett%20Allen/plus_minus.png">
       </div>
     </div>
     <div class="row">
       <div class="col-lg-4 col-md-4">
-        <img class="plot" id="test3">
+        <img class="plot" id="rank" src="../Plot/player_plot_images/CLE/Jarrett%20Allen/rank_evo.png">
       </div>
       <div class="col-lg-8 col-md-8">
         Explanations
@@ -106,7 +106,7 @@
         Explanations
       </div>
       <div class="col-lg-4 col-md-4">
-        <img class="plot" id="test4">
+        <img class="plot" id="win-lose" src="../Plot/player_plot_images/CLE/Jarrett%20Allen/win_lose.png">
       </div>
     </div>
   </div>
@@ -117,16 +117,18 @@
       def selectChange(event):
         if int(document.getElementById("list").selectedIndex) < 16 :
           team = 'CLE'
+          teamName = 'Cleveland Cavaliers'
         else :
           team = 'CHI'
+          teamName = 'Chicago Bulls'
 
         pyscript.write('player', document.getElementById("list").value)
-        pyscript.write('team', team)
+        pyscript.write('team', teamName)
         document.getElementById("photo").src = "../assets/players/" + document.getElementById("list").value + ".png"
-        document.getElementById("test").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/general_data.png"
-        document.getElementById("test2").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/plus_minus.png"
-        document.getElementById("test3").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/rank_evo.png"
-        document.getElementById("test4").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/win_lose.png"
+        document.getElementById("general").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/general_data.png"
+        document.getElementById("plus-minus").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/plus_minus.png"
+        document.getElementById("rank").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/rank_evo.png"
+        document.getElementById("win-lose").src = "../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/win_lose.png"
 
       change_proxy = create_proxy(selectChange)
       document.getElementById("list").addEventListener("click", change_proxy)

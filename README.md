@@ -28,7 +28,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/JambonPasFrais/python-project-M1">
-    <img src="assets/img/YNBA.svg" alt="Logo" width="100%" height="100%" style="position:float;">
+    <img src="assets/main/YNBA.svg" alt="Logo" width="100%" height="100%" style="position:float;">
   </a>
 
 <h3 align="center">YNBA</h3>
