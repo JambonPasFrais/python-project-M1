@@ -1,3 +1,5 @@
+import time
+
 from nba_api.stats.endpoints import playercareerstats
 from nba_api.stats.endpoints import playerdashboardbyyearoveryear
 import matplotlib.pyplot as plt
@@ -75,19 +77,22 @@ def plot_data(player, team,season):
 
 def player_rank_evo(player, team):
     rows_list = extract_csv_data(player)
-    #get the age of the player for every seasons he played
-    global_stats = playercareerstats.PlayerCareerStats(player_id=rows_list[1][0]).get_data_frames()[0]
-    age_dict = global_stats[['PLAYER_AGE']].to_dict()
     #get player's ranks
     rank_stats = playercareerstats.PlayerCareerStats(player_id=rows_list[1][0]).get_data_frames()[10]
-    stats_dict = rank_stats[['SEASON_ID','RANK_PTS','PLAYER_AGE']].to_dict()
+    stats_dict = rank_stats[['SEASON_ID','RANK_PTS']].to_dict()
+    age_list = []
+    previous_season = ''
+    for row in rows_list[1:]:
+        if previous_season != row[rows_list[0].index('SEASON_ID')]:
+            age_list.append(int(float(row[rows_list[0].index('PLAYER_AGE')])))
+            previous_season = row[rows_list[0].index('SEASON_ID')]
     #Plot
     plt.figure()
-    plt.plot(list(age_dict['PLAYER_AGE'].values()), list(stats_dict['RANK_PTS'].values()), "-", color='black')
-    for i in range(len(list(age_dict['PLAYER_AGE'].values()))):
-        plt.plot(list(age_dict['PLAYER_AGE'].values())[i],list(stats_dict['RANK_PTS'].values())[i], "o", label=list(stats_dict['SEASON_ID'].values())[i])
+    plt.plot(age_list, list(stats_dict['RANK_PTS'].values()), "-", color='black')
+    for i in range(len(age_list)):
+        plt.plot(age_list[i],list(stats_dict['RANK_PTS'].values())[i], "o", label=list(stats_dict['SEASON_ID'].values())[i])
     plt.gca().invert_yaxis()
-    plt.gca().set_xticks(list(age_dict['PLAYER_AGE'].values()))
+    plt.gca().set_xticks(age_list)
     plt.gca().set_yticks(list(stats_dict['RANK_PTS'].values()))
     plt.grid(True)
     plt.title(player+"'s rank evolution")
@@ -145,14 +150,15 @@ def win_lose(player, team):
     plt.close()
 
 def plot_all_data(player,season):
-
-    plot_data(player['name'], player['team'], season)
-    player_rank_evo(player['name'], player['team'])
-    plus_minus(player['name'], player['team'])
-    win_lose(player['name'], player['team'])
-    print("Genration done for "+player['name'])
-
+    time.sleep(.3)
+    try:
+        plot_data(player['name'], player['team'], season)
+        player_rank_evo(player['name'], player['team'])
+        plus_minus(player['name'], player['team'])
+        win_lose(player['name'], player['team'])
+        print("Genration done for "+player['name'])
+    except Exception as e:
+        print("An error as occured for "+player+": " + str(e))
     plt.close('all')
 
-
-plot_all_data({'name': 'Bam Adebayo','team': 'test'},'2022-23')
+#player_rank_evo('Andre Drummond','CHI')
