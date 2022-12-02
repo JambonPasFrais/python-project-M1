@@ -1,7 +1,6 @@
 from nba_api.stats.endpoints import playercareerstats
 from nba_api.stats.endpoints import playerdashboardbyyearoveryear
 import matplotlib.pyplot as plt
-import pandas as pd
 import csv
 
 def extract_csv_data(player):
