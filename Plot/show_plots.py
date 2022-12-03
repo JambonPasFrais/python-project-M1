@@ -1,7 +1,6 @@
 import os
 import os.path as path
 import player_plot
-import matplotlib.pyplot as plt
 import team_plot as tp
 
 #get the list of all the files in the players_stats directory
@@ -18,11 +17,12 @@ team_dict = {
     "CLE": "Cleveland Cavaliers"
 }
 season = '2022-23'
+#Getting all the players for the wanted teams (teams that are listed in the dict)
 for player in players_list:
     result = player_plot.check_players_team(player,team_dict, season)
     if result != None:
         required_players_list.append(result)
-
+#Creating missing directories and generating all the plots
 print("Generation of all the plots in progress... (it can take a while)")
 for player_info in required_players_list:
     path_to_team_dir = "player_plot_images/"+player_info['team']
