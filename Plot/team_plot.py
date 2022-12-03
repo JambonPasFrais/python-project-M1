@@ -28,6 +28,7 @@ def plot_evolution(team):
     plt.figure()
     plt.plot(season_list, rank_list, "-", color="blue", marker='o')
     plt.grid(True)
+    plt.gca().invert_yaxis()
     plt.title(team + "'s evolution rank")
     plt.savefig("team_plot_images/" + team + " evolution rank.png") # Save the image in png
 
@@ -140,15 +141,15 @@ def plot_spider(team):
     fig.write_image("team_plot_images/" + team + " defensive spider plot.png") # Savce image in png
 
 # Test
-test = 0
+test = 1
 if test == 1 :
     team1 = "Cleveland Cavaliers"
     team2 = "Chicago Bulls"
     plot_evolution(team1)
     plot_evolution(team2)
-    plot_histogram(team1)
+    '''plot_histogram(team1)
     plot_histogram(team2)
     plot_correlation(team1)
     plot_correlation(team2)
     plot_spider(team1)
-    plot_spider(team2)
+    plot_spider(team2)'''
