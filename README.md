@@ -153,7 +153,7 @@ You will also need to have installed pip and our libraries like so:
 
 ### AI
 1. Open the decision_tree.ipynb file in the AI directory on Jupyter or PyCharm 
-2. AI
+2. Run each step
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
