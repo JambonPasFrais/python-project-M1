@@ -1,12 +1,11 @@
 import time
-
 from nba_api.stats.endpoints import playercareerstats
 from nba_api.stats.endpoints import playerdashboardbyyearoveryear
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import csv
 
-
+#Allows to check if the player is in the required team
 def check_players_team(player, team_dict, season):
     if hasPlayed(player):
         player_data = extract_csv_data(player)
@@ -16,6 +15,7 @@ def check_players_team(player, team_dict, season):
                     return {'name': player, 'team': abrev}
     return None
 
+#Extracts data from a csv file and return the content as list
 def extract_csv_data(player):
     with open("../Scrapping/players_stats/" + player + ".csv", mode="r") as infile:
         reader = csv.reader(infile)
@@ -24,26 +24,12 @@ def extract_csv_data(player):
             rows_list.append(rows)
         return rows_list
 
-def wait_choice(choice_list,index,text):
-    choice = 0
-    print("Choose the season for the "+text)
-    for i in range(len(choice_list)):
-        print(str(i+1)+". "+choice_list[i][index])
-    while choice < 1 or choice > len(choice_list):
-        try:
-            choice = int(input("Enter your choice: "))
-            if choice < 1 or choice > len(choice_list):
-                print("Invalid choice, try again")
-                choice = 0
-        except:
-            print("Invalid input, try again")
-
-    return choice_list[choice-1][index]
-
+#Return if the player has played this season
 def hasPlayed(player):
     data_list = extract_csv_data(player)
     return  (len(data_list) - 1)
 
+#Plots general data for the player for a specific season
 def plot_data(player, team,season):
     rows_list = extract_csv_data(player)
     data_dict = {
@@ -76,6 +62,7 @@ def plot_data(player, team,season):
     plt.savefig("player_plot_images/"+team+"/"+player+"/general_data.png")
     plt.close()
 
+#Plots player's rank evolution through the seasons he played
 def player_rank_evo(player, team):
     rows_list = extract_csv_data(player)
     #get player's ranks
@@ -103,6 +90,7 @@ def player_rank_evo(player, team):
     plt.savefig("player_plot_images/"+team+"/"+player+"/rank_evo.png")
     plt.close()
 
+#Plots a player's plus/minus evolution
 def plus_minus(player, team):
     rows_list = extract_csv_data(player)
     player_id = rows_list[1][0]
@@ -124,13 +112,16 @@ def plus_minus(player, team):
     plt.savefig("player_plot_images/"+team+"/"+player+"/plus_minus.png")
     plt.close()
 
+#Shows the winrate of a player per season
 def win_lose(player, team):
     rows_list = extract_csv_data(player)
     player_id = rows_list[1][0]
     stats = playerdashboardbyyearoveryear.PlayerDashboardByYearOverYear(player_id=player_id).get_data_frames()[1]
+    #Wanted data are stored in a dict
     data = stats[['GROUP_VALUE','W','L']].to_dict()
     rows_count = len(data['GROUP_VALUE'])
     mean_list = []
+    #Calculation of the win rate per season. Stores the results in a list
     for i in range(rows_count):
         temp_mean = 0
         temp_total = 0
@@ -142,38 +133,42 @@ def win_lose(player, team):
                 temp_total += data[key][i]
         temp_mean = temp_mean / temp_total * 100
         mean_list.append(round(temp_mean, ndigits=2))
+    #Plotting evolution
     plt.figure()
     plt.barh(list(data['GROUP_VALUE'].values()), mean_list)
+    #Adding the text at the end of each bar
     for i,v in enumerate(mean_list):
         plt.text(v + .8, i - .1, str(v)+"%", color="black", fontweight="bold")
     plt.title(player+"'s win rate per season")
     plt.savefig("player_plot_images/"+team+"/"+player+"/win_lose.png")
     plt.close()
 
+#Plots a spider chart which contains home games stats and roads games stats
 def data_spider(player, team, season):
     rows_list = extract_csv_data(player)
     player_id = rows_list[1][0]
     home_stats = playerdashboardbyyearoveryear.PlayerDashboardByYearOverYear(player_id=player_id, location_nullable='Home').get_data_frames()[1]
     away_stats = playerdashboardbyyearoveryear.PlayerDashboardByYearOverYear(player_id=player_id, location_nullable='Road').get_data_frames()[1]
-
+    #Sorting wanted data in dictionnaries
     home_stats = home_stats[['GROUP_VALUE', 'TEAM_ABBREVIATION', 'OREB', 'DREB', 'FTM', 'FTA', 'PF', 'FGM', 'FGA']].to_dict()
     away_stats = away_stats[['GROUP_VALUE', 'TEAM_ABBREVIATION', 'OREB', 'DREB', 'FTM', 'FTA', 'PF', 'FGM', 'FGA']].to_dict()
     for key in home_stats:
         home_stats[key] = list(home_stats[key].values())
     for key in away_stats:
         away_stats[key] = list(away_stats[key].values())
-
     home_wanted_stats = {}
     away_wanted_stats = {}
+    #Getting home stats for a player, in a certain team and for a certain season
     for i in range(len(home_stats['TEAM_ABBREVIATION'])):
         if home_stats['TEAM_ABBREVIATION'][i] == team and home_stats['GROUP_VALUE'][i] == season:
             for key in home_stats:
                 home_wanted_stats[key] = home_stats[key][i]
+    #Getting away stats for a player, in a certain team and for a certain season
     for i in range(len(away_stats['TEAM_ABBREVIATION'])):
         if away_stats['TEAM_ABBREVIATION'][i] == team and away_stats['GROUP_VALUE'][i] == season:
             for key in away_stats:
                 away_wanted_stats[key] = away_stats[key][i]
-
+    #Getting the max value of the two stats list to make the range of the spider chart
     max = 0
     for val in list(home_wanted_stats.values())[2:]:
         if val > max:
@@ -181,7 +176,7 @@ def data_spider(player, team, season):
     for val in list(away_wanted_stats.values())[2:]:
         if val > max:
             max = val
-
+    #Plot of the spider chart
     categories = list(home_wanted_stats.keys())[2:]
     fig = go.Figure()
     fig.add_trace(go.Scatterpolar(r=list(home_wanted_stats.values())[2:], theta=categories,fill='toself',name='Home stats'))
@@ -189,7 +184,9 @@ def data_spider(player, team, season):
     fig.update_layout(polar=dict(radialaxis=dict(visible=True,range=[0, max+5])),showlegend=True,title_text=player+"'s home and away stats for the "+season+" season", title_x=0.5)
     fig.write_image('player_plot_images/'+team+'/'+player+'/home_away.png')
 
+#Allows to plot all the data at one. Avoid calling to many differents functions in another file
 def plot_all_data(player,season):
+    #Waiting 0.3 second to start scrapping yo avoid a Timed Out error
     time.sleep(.3)
     try:
         plot_data(player['name'], player['team'], season)
@@ -198,9 +195,7 @@ def plot_all_data(player,season):
         win_lose(player['name'], player['team'])
         data_spider(player['name'], player['team'], season)
         print("Genration done for "+player['name'])
-
     except Exception as e:
         print("An error as occured for "+player['name']+": " + str(e))
+    #Making sure that all the plots generated are closed in order to free some space and improve performances
     plt.close('all')
-
-#data_spider('Andre Drummond','CHI', '2022-23')
