@@ -3,6 +3,7 @@ import time
 from nba_api.stats.endpoints import playercareerstats
 from nba_api.stats.endpoints import playerdashboardbyyearoveryear
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 import csv
 
 
@@ -149,6 +150,45 @@ def win_lose(player, team):
     plt.savefig("player_plot_images/"+team+"/"+player+"/win_lose.png")
     plt.close()
 
+def data_spider(player, team, season):
+    rows_list = extract_csv_data(player)
+    player_id = rows_list[1][0]
+    home_stats = playerdashboardbyyearoveryear.PlayerDashboardByYearOverYear(player_id=player_id, location_nullable='Home').get_data_frames()[1]
+    away_stats = playerdashboardbyyearoveryear.PlayerDashboardByYearOverYear(player_id=player_id, location_nullable='Road').get_data_frames()[1]
+
+    home_stats = home_stats[['GROUP_VALUE', 'TEAM_ABBREVIATION', 'OREB', 'DREB', 'FTM', 'FTA', 'PF', 'FGM', 'FGA']].to_dict()
+    away_stats = away_stats[['GROUP_VALUE', 'TEAM_ABBREVIATION', 'OREB', 'DREB', 'FTM', 'FTA', 'PF', 'FGM', 'FGA']].to_dict()
+    for key in home_stats:
+        home_stats[key] = list(home_stats[key].values())
+    for key in away_stats:
+        away_stats[key] = list(away_stats[key].values())
+
+    home_wanted_stats = {}
+    away_wanted_stats = {}
+    for i in range(len(home_stats['TEAM_ABBREVIATION'])):
+        if home_stats['TEAM_ABBREVIATION'][i] == team and home_stats['GROUP_VALUE'][i] == season:
+            for key in home_stats:
+                home_wanted_stats[key] = home_stats[key][i]
+    for i in range(len(away_stats['TEAM_ABBREVIATION'])):
+        if away_stats['TEAM_ABBREVIATION'][i] == team and away_stats['GROUP_VALUE'][i] == season:
+            for key in away_stats:
+                away_wanted_stats[key] = away_stats[key][i]
+
+    max = 0
+    for val in list(home_wanted_stats.values())[2:]:
+        if val > max:
+            max = val
+    for val in list(away_wanted_stats.values())[2:]:
+        if val > max:
+            max = val
+
+    categories = list(home_wanted_stats.keys())[2:]
+    fig = go.Figure()
+    fig.add_trace(go.Scatterpolar(r=list(home_wanted_stats.values())[2:], theta=categories,fill='toself',name='Home stats'))
+    fig.add_trace(go.Scatterpolar(r=list(away_wanted_stats.values())[2:], theta=categories, fill='toself', name='Away stats'))
+    fig.update_layout(polar=dict(radialaxis=dict(visible=True,range=[0, max+5])),showlegend=True,title_text=player+"'s home and away stats for the "+season+" season", title_x=0.5)
+    fig.write_image('player_plot_images/'+team+'/'+player+'/home_away.png')
+
 def plot_all_data(player,season):
     time.sleep(.3)
     try:
@@ -156,9 +196,11 @@ def plot_all_data(player,season):
         player_rank_evo(player['name'], player['team'])
         plus_minus(player['name'], player['team'])
         win_lose(player['name'], player['team'])
+        data_spider(player['name'], player['team'], season)
         print("Genration done for "+player['name'])
+
     except Exception as e:
         print("An error as occured for "+player['name']+": " + str(e))
     plt.close('all')
 
-#player_rank_evo('Andre Drummond','CHI')
+#data_spider('Andre Drummond','CHI', '2022-23')
