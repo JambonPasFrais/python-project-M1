@@ -121,7 +121,7 @@ You will also need to have installed pip and our libraries like so:
   pip install -U kaleido
   ```
   ```sh
-  pip install sklearn
+  pip install scikit-learn
   ```
 ### Installation
 
