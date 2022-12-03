@@ -71,7 +71,7 @@
 ## About The Project
 
 
-The idea of the project is simple. We had to use our knowledge in data scrapping, AI and data handling to scrap the NBA's website stats and make some meaningfull plots about them.
+The idea of the project is simple. We had to use our knowledge in data scrapping, AI and data handling to scrap the NBA's website stats and make some meaningful plots about them.
 As a bonus, we could create an AI that predicts a value from another.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -119,6 +119,9 @@ You will also need to have installed pip and our libraries like so:
   ```
   ```sh
   pip install -U kaleido
+  ```
+  ```sh
+  pip install sklearn
   ```
 ### Installation
 
