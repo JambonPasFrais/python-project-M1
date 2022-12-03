@@ -114,6 +114,12 @@ You will also need to have installed pip and our libraries like so:
   ```sh
   pip install pandas
   ```
+  ```sh
+  pip install plotly
+  ```
+  ```sh
+  pip install -U kaleido
+  ```
 ### Installation
 
 1. Clone the repo
