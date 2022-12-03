@@ -80,11 +80,21 @@ As a bonus, we could create an AI that predicts a value from another.
 
 ### Built With
 
-* [![Pandas]][Pandas-url]
-* [![matplotlib]][matplotlib-url]
-* [![Node.js]][node.js-url]
-* [![Pyscript]][pyscript-url]
-* [![NBA_api]][nba_api-url]
+<a href="https://pandas.pydata.org/">
+    <img src="https://pandas.pydata.org/static/img/pandas_white.svg" alt="Logo" width="200">
+</a>
+<a href='https://matplotlib.org/'>
+    <img src='https://matplotlib.org/_static/images/logo_dark.svg' alt="Logo" width="200">
+</a>
+<a href="https://nodejs.org/en/">
+    <img src="https://nodejs.org/static/images/logo.svg" alt="Logo" width="200">
+</a>
+<a href="https://pyscript.net/">
+    <img src="https://pyscript.net/assets/images/pyscript-sticker-black.svg" alt="Logo" width="200">
+</a>
+<a href="https://github.com/swar/nba_api">
+    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="Logo" width="200">
+</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -130,11 +140,20 @@ You will also need to have installed pip and our libraries like so:
    git clone https://github.com/JambonPasFrais/python-project-M1.git
    ```
 2. Make sure every package is installed as listed on top of this category
-3. In the main directory, run:
+
+### Website
+1. In the main directory, run:
    ```sh
    node index.js
    ```
-4. Click on the link in the console and go to http://localhost:4444
+2. Click on the link in the console and go to http://localhost:4444
+
+### Data analysis and visualization
+1. Execute the show_plots.py
+
+### AI
+1. Open the decision_tree.ipynb file in the AI directory on Jupyter or PyCharm 
+2. AI
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -171,13 +190,5 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [license-url]: https://github.com/JambonPasFrais/python-project-M1/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
-[Pandas]: https://pandas.pydata.org/static/img/pandas_white.svg
-[Pandas-url]: https://pandas.pydata.org/
-[matplotlib]: https://matplotlib.org/_static/images/logo_dark.svg
-[matplotlib-url]: https://matplotlib.org/
-[node.js]: https://nodejs.org/static/images/logo.svg
-[node.js-url]: https://nodejs.org/en/
-[pyscript]: https://pyscript.net/assets/images/pyscript-sticker-black.svg
-[pyscript-url]: https://pyscript.net/
 [nba_api]: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png
 [nba_api-url]: https://github.com/swar/nba_api
