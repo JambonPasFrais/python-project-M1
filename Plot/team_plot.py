@@ -22,7 +22,7 @@ def plot_evolution(team):
     # Get the rank of the 10 last years
     for i in range(len(season_list)-10, len(season_list)):
         season_list.append(rows_list[i][3])
-        rank_list.append(rows_list[i][9])
+        rank_list.append(int(rows_list[i][9]))
 
     # Plot evolution plot
     plt.figure()
@@ -44,25 +44,15 @@ def plot_histogram(team) :
         fg3_list.append(int(rows_list[i][21]))
         season_list.append(rows_list[i][3])
 
-    # From list to dict
-    fg2_dict = {}
-    fg3_dict = {}
-    for i in range(len(season_list)):
-        fg2_dict[season_list[i]] = fg2_list[i]
-    fg2_dict = dict(sorted(fg2_dict.items(), key=lambda item: int(item[1])))
-    for i in range(len(season_list)):
-        fg3_dict[season_list[i]] = fg3_list[i]
-    fg3_dict = dict(sorted(fg3_dict.items(), key=lambda item: int(item[1])))
-
     # Plot bar plot
     plt.figure()
-    plt.barh(list(fg2_dict.keys()), list(fg2_dict.values()))
+    plt.barh(season_list, fg2_list)
     plt.grid(True)
     plt.title("Number of 2 points of " + team)
     plt.savefig("team_plot_images/" + team + " number of 2 points lends.png") # Save image in png
 
     plt.figure()
-    plt.barh(list(fg3_dict.keys()), list(fg3_dict.values()))
+    plt.barh(season_list, fg3_list)
     plt.grid(True)
     plt.title("Number of 3 points of " + team)
     plt.savefig("team_plot_images/" + team + " number of 3 points lends.png")
