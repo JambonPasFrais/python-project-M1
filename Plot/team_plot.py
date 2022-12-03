@@ -147,9 +147,9 @@ if test == 1 :
     team2 = "Chicago Bulls"
     plot_evolution(team1)
     plot_evolution(team2)
-    '''plot_histogram(team1)
+    plot_histogram(team1)
     plot_histogram(team2)
     plot_correlation(team1)
     plot_correlation(team2)
     plot_spider(team1)
-    plot_spider(team2)'''
+    plot_spider(team2)
