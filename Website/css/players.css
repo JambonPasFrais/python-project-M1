@@ -44,3 +44,7 @@ select {
   object-fit: cover;
   margin-bottom: 20px;
 }
+
+.align-middle {
+  margin:auto;
+}

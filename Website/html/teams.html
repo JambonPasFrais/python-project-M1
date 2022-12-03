@@ -44,7 +44,7 @@
       <div class="col-lg-4 col-md-4">
         <img id="photo" src="../assets/teams/logo%20Cleveland%20Cavaliers.png">
       </div>
-      <div class="col-lg-8 col-md-8">
+      <div class="col-lg-8 col-md-8 align-middle">
         <h1 id="team">Cleveland Cavaliers</h1>
       </div>
     </div>
@@ -52,40 +52,41 @@
       <div class="col-lg-4 col-md-4">
         <img class="plot" id="rank" src="../../Plot/team_plot_images/Cleveland%20Cavaliers%20evolution%20rank.png">
       </div>
-      <div class="col-lg-8 col-md-8">
-        Explanations
+      <div class="col-lg-8 col-md-8 align-middle">
+        We choose to plot the rank evolution of the team for the 10 last years, in this way, we can see the evolution of team’s performance year after year.
+        <br>The utilisation of an evolution plot was obvious cause it’s the best way to quickly have a view of the variation of a same variable (we also inverted the y axis for a better reading).
+        <br>This plot allows us to have an idea of the capacity of a team to improve, stay or decrease in the NBA league.
       </div>
     </div>
     <div class="row margin-row">
       <div class="col-12 col-lg-4 col-md-4 order-md-2">
         <img class="plot" id="correlation" src="../../Plot/team_plot_images/Cleveland%20Cavaliers%20correlation%20plot.png">
       </div>
-      <div class="col-12 col-lg-8 col-md-8 order-md-1">
-        Explanations
+      <div class="col-12 col-lg-8 col-md-8 order-md-1 align-middle">
+        The correlation plot helps us to see which variables can be useful to combine in a plot and which variables have an impact on other.
+        <br>If the correlation between 2 variables is - 1 < corr(x,y) < -0.5 or 0.5 < corr(x,y) < 1, it’s a good indicator to have a deeper look on them. On the plot, we only show variables with the better correlation. For instance, we can see a huge correlation between the number of 2 points attempts and the number of 2 points scored.
+        <br>This shows us that when a team try to score 2 points, most of the time, they succeed. But the correlation is lower for 3 points attempts and 3 points scored, we can conclude that the team should train their 3 points to have a better 3 points scored percentage or, when they have the choice, they should always choose to try 2 points.
       </div>
     </div>
     <div class="row margin-row">
       <div class="col-lg-4 col-md-4">
         <img class="plot" id="2points" src="../../Plot/team_plot_images/Cleveland%20Cavaliers%20number%20of%202%20points%20lends.png">
       </div>
-      <div class="col-lg-8 col-md-8">
-        Explanations
-      </div>
-    </div>
-    <div class="row margin-row">
-      <div class="col-12 col-lg-4 col-md-4 order-md-2">
+      <div class="col-lg-4 col-md-4">
         <img class="plot" id="3points" src="../../Plot/team_plot_images/Cleveland%20Cavaliers%20number%20of%203%20points%20lends.png">
       </div>
-      <div class="col-12 col-lg-8 col-md-8 order-md-1">
-        Explanations
+      <div class="col-lg-4 col-md-4 align-middle">
+        We have also created a bar plot to take a look at the numbers of 2 points and 3 points scored during a complete season. The bar plot is the plot to model a quantity. This plot must be completed with the first plot (rank evolution) to allow us to deduct if the number of 2 and 3 points scored have a real impact on the final rank. In the future, we can also deduct if it’s efficient to be offensive.
       </div>
     </div>
     <div class="row margin-row">
       <div class="col-lg-4 col-md-4">
         <img class="plot" id="defensive" src="../../Plot/team_plot_images/Cleveland%20Cavaliers%20defensive%20spider%20plot.png">
       </div>
-      <div class="col-lg-8 col-md-8">
-        Explanations
+      <div class="col-lg-8 col-md-8 align-middle">
+        The last plot is a spider chart where we can see the main defensive data: OREB, DREB, TOV, STL, BLK.
+        <br>The plot represents those data for last 3 years to see the differences in the defence efficiency over the years.
+        <br>This plot has also to be put in comparison with the bar plot and the evolution plot, to know if the defensive strategy is better than the offensive one.
       </div>
     </div>
   </div>
