@@ -1,16 +1,10 @@
-import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.patches import Circle, RegularPolygon
-from matplotlib.path import Path
-from matplotlib.projections.polar import PolarAxes
-from matplotlib.projections import register_projection
-from matplotlib.spines import Spine
-from matplotlib.transforms import Affine2D
 import pandas as pd
+import plotly.graph_objects as go
 import seaborn as sns
-import plotly.express as px
 import csv
 
+# Extraction of data in the csv fill to a list
 def extract_csv_data(team):
     with open("../Scrapping/teams_stats/" + team + ".csv", mode="r") as infile:
         reader = csv.reader(infile)
@@ -24,16 +18,18 @@ def plot_evolution(team):
     rows_list = extract_csv_data(team)
     season_list = []
     rank_list = []
+
     # Get the rank of the 10 last years
     for i in range(len(season_list)-10, len(season_list)):
         season_list.append(rows_list[i][3])
         rank_list.append(rows_list[i][9])
 
+    # Plot evolution plot
     plt.figure()
     plt.plot(season_list, rank_list, "-", color="blue", marker='o')
     plt.grid(True)
     plt.title(team + "'s evolution rank")
-    plt.savefig("team_plot_images/" + team + " evolution rank.png")
+    plt.savefig("team_plot_images/" + team + " evolution rank.png") # Save the image in png
 
 # Create a spider plot
 def plot_histogram(team) :
@@ -41,11 +37,14 @@ def plot_histogram(team) :
     fg2_list = []
     fg3_list = []
     season_list = []
+
+    # Get number of 2 & 3 points lend per year for last 10 years
     for i in range(len(rows_list)-10, len(rows_list)):
         fg2_list.append(int(rows_list[i][18]))
         fg3_list.append(int(rows_list[i][21]))
         season_list.append(rows_list[i][3])
 
+    # From list to dict
     fg2_dict = {}
     fg3_dict = {}
     for i in range(len(season_list)):
@@ -55,21 +54,24 @@ def plot_histogram(team) :
         fg3_dict[season_list[i]] = fg3_list[i]
     fg3_dict = dict(sorted(fg3_dict.items(), key=lambda item: int(item[1])))
 
+    # Plot bar plot
     plt.figure()
     plt.barh(list(fg2_dict.keys()), list(fg2_dict.values()))
     plt.grid(True)
     plt.title("Number of 2 points of " + team)
-    plt.savefig("team_plot_images/fg2 " + team + ".png")
+    plt.savefig("team_plot_images/" + team + " number of 2 points lends.png") # Save image in png
 
     plt.figure()
     plt.barh(list(fg3_dict.keys()), list(fg3_dict.values()))
     plt.grid(True)
     plt.title("Number of 3 points of " + team)
-    plt.savefig("team_plot_images/fg3 " + team + ".png")
+    plt.savefig("team_plot_images/" + team + " number of 3 points lends.png")
 
 # Create a correlation plot
 def plot_correlation(team):
-    df = pd.read_csv("../Scrapping/teams_stats/" + team + ".csv")
+    df = pd.read_csv("../Scrapping/teams_stats/" + team + ".csv") # From csv to DataFrame
+
+    # Remove useless columns
     df = df.drop('TEAM_ID', axis=1)
     df = df.drop('TEAM_NAME', axis=1)
     df = df.drop('TEAM_CITY', axis=1)
@@ -92,13 +94,17 @@ def plot_correlation(team):
     df = df.drop('STL', axis=1)
     df = df.drop('TOV', axis=1)
     df = df.drop('BLK', axis=1)
+
+    # Plot the heat map
     sns.heatmap(df.corr())
-    plt.savefig("team_plot_images/correlation " + team + ".png")
+    plt.savefig("team_plot_images/" + team + " correlation plot.png") # Save image in png
 
 # Create a spider plot
 def plot_spider(team):
     rows_list = extract_csv_data(team)
     data_list = []
+
+    # Get defensives data for last 3 years
     for i in range(len(rows_list)-3, len(rows_list)):
         tmp_list = []
         tmp_list.append(int(rows_list[i][24]))
@@ -107,42 +113,52 @@ def plot_spider(team):
         tmp_list.append(int(rows_list[i][30]))
         tmp_list.append(int(rows_list[i][31]))
         data_list.append(tmp_list)
+    D1 = data_list[0]
+    D2 = data_list[1]
+    D3 = data_list[2]
 
+    # Plot spider plot
+    categories = ['OREB', 'DREB', 'TOV', 'STL', 'BLK']
+    fig = go.Figure()
 
-    N = 9
-    theta = radar_factory(N, frame='polygon')
-    spoke_labels = data_list.pop(0)
-    fig, axs = plt.subplots(figsize=(9, 9), nrows=2, ncols=2,
-                            subplot_kw=dict(projection='radar'))
-    fig.subplots_adjust(wspace=0.25, hspace=0.20, top=0.85, bottom=0.05)
-    colors = ['b', 'r', 'g']
-    for ax, (title, case_data) in zip(axs.flat, data):
-        ax.set_rgrids([0.2, 0.4, 0.6, 0.8])
-        ax.set_title(title, weight='bold', size='medium', position=(0.5, 1.1),
-                     horizontalalignment='center', verticalalignment='center')
-        for d, color in zip(case_data, colors):
-            ax.plot(theta, d, color=color)
-            ax.fill(theta, d, facecolor=color, alpha=0.25, label='_nolegend_')
-        ax.set_varlabels(spoke_labels)
+    fig.add_trace(go.Scatterpolar( # year - 2
+        r = D1,
+        theta = categories,
+        name='Second to last years'
+    ))
+    fig.add_trace(go.Scatterpolar( # year - 1
+        r = D2,
+        theta = categories,
+        name = 'Last year'
+    ))
+    fig.add_trace(go.Scatterpolar( # Current year
+        r = D3,
+        theta = categories,
+        name = 'Current year'
+    ))
 
-        # add legend relative to top-left plot
-    labels = ('Factor 1', 'Factor 2', 'Factor 3', 'Factor 4', 'Factor 5')
-    legend = axs[0, 0].legend(labels, loc=(0.9, .95),
-                              labelspacing=0.1, fontsize='small')
+    fig.update_layout( # Get the plot easier to read
+        polar = dict(
+            radialaxis = dict(
+                visible = True,
+                range = [0, 3000]
+            )),
+        showlegend = True
+    )
+    fig.update_traces(fill = "toself")
 
-    fig.text(0.5, 0.965, '5-Factor Solution Profiles Across Four Scenarios',
-             horizontalalignment='center', color='black', weight='bold',
-             size='large')
-
-    plt.show()
+    fig.write_image("team_plot_images/" + team + " defensive spider plot.png") # Savce image in png
 
 # Test
-team1 = "Cleveland Cavaliers"
-team2 = "Chicago Bulls"
-#plot_evolution(team1)
-#plot_evolution(team2)
-#plot_histogram(team1)
-#plot_histogram(team2)
-#plot_correlation(team1)
-#plot_correlation(team2)
-plot_spider(team1)
+test = 0
+if test == 1 :
+    team1 = "Cleveland Cavaliers"
+    team2 = "Chicago Bulls"
+    plot_evolution(team1)
+    plot_evolution(team2)
+    plot_histogram(team1)
+    plot_histogram(team2)
+    plot_correlation(team1)
+    plot_correlation(team2)
+    plot_spider(team1)
+    plot_spider(team2)
