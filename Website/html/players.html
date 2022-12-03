@@ -77,7 +77,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row margin-row">
       <div class="col-lg-4 col-md-4">
         <img class="plot" id="general" src="../../Plot/player_plot_images/CLE/Jarrett%20Allen/general_data.png">
       </div>
@@ -85,15 +85,15 @@
         Explanations
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-8 col-md-8">
-        Explanations
-      </div>
-      <div class="col-lg-4 col-md-4">
+    <div class="row margin-row">
+      <div class="col-12 col-lg-4 col-md-4 order-md-2">
         <img class="plot" id="plus-minus" src="../../Plot/player_plot_images/CLE/Jarrett%20Allen/plus_minus.png">
       </div>
+      <div class="col-12 col-lg-8 col-md-8 order-md-1">
+        Explanations
+      </div>
     </div>
-    <div class="row">
+    <div class="row margin-row">
       <div class="col-lg-4 col-md-4">
         <img class="plot" id="rank" src="../../Plot/player_plot_images/CLE/Jarrett%20Allen/rank_evo.png">
       </div>
@@ -101,12 +101,20 @@
         Explanations
       </div>
     </div>
-  <div class="row">
-      <div class="col-lg-8 col-md-8">
+  <div class="row margin-row">
+      <div class="col-12 col-lg-4 col-md-4 order-md-2">
+        <img class="plot" id="win-lose" src="../../Plot/player_plot_images/CLE/Jarrett%20Allen/win_lose.png">
+      </div>
+    <div class="col-12 col-lg-8 col-md-8 order-md-1">
         Explanations
       </div>
+    </div>
+    <div class="row margin-row">
       <div class="col-lg-4 col-md-4">
-        <img class="plot" id="win-lose" src="../../Plot/player_plot_images/CLE/Jarrett%20Allen/win_lose.png">
+        <img class="plot" id="home-away" src="../../Plot/player_plot_images/CLE/Jarrett%20Allen/home_away.png">
+      </div>
+      <div class="col-lg-8 col-md-8">
+        Explanations
       </div>
     </div>
   </div>
@@ -129,6 +137,8 @@
         document.getElementById("plus-minus").src = "../../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/plus_minus.png"
         document.getElementById("rank").src = "../../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/rank_evo.png"
         document.getElementById("win-lose").src = "../../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/win_lose.png"
+        document.getElementById("home-away").src = "../../Plot/player_plot_images/" + team + "/" + document.getElementById("list").value + "/home_away.png"
+
 
       change_proxy = create_proxy(selectChange)
       document.getElementById("list").addEventListener("click", change_proxy)
@@ -140,10 +150,6 @@
   <div class="container">
     <div class="row align-items-center">
       <div class="col-lg-4 text-lg-start">Copyright &copy; YNBA</div>
-      <div class="col-lg-4 text-lg-end">
-        <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
-        <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
-      </div>
     </div>
   </div>
 </footer>
